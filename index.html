@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Platform</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #28a745;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+        }
+        
+        .product-section {
+            padding: 20px;
+        }
+        
+        /* Product grid styling */
+        .product-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        
+        .product-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 200px;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-item img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .product-item p {
+            margin: 10px 0;
+        }
+        
+        .buy-btn, .bid-btn {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .bid-btn {
+            background-color: #28a745;
+        }
+        
+        .buy-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .bid-btn:hover {
+            background-color: #218838;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .product-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Auction Items */
+        .auction-items {
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .items .item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .items .item h3 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .items .item p {
+            color: #555;
+        }
+
+        .items .item input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .items .item button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .items .item button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Add Product Form */
+        .add-product {
+            background-color: #fff;
+            margin: 40px auto;
+            padding: 20px;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .add-product h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .add-product form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .add-product form input[type="text"],
+        .add-product form textarea,
+        .add-product form input[type="number"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .add-product form button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .add-product form button:hover {
+            background-color: #218838;
+        }
+
+        /* Logout Link Styles */
+        #logout-link {
+            color: #ff6347;
+        }
+
+        #logout-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .items {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                font-size: 1rem;
+                margin: 0 10px;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Auction Platform</h1>
+        <nav>
+            <a href="login.html" id="login-link">Login</a>
+            <a href="register.html" id="register-link">Register</a>
+            <a href="#" id="logout-link" style="display:none;">Logout</a>
+        </nav>
+    </header>
+    
+    <!-- <section class="auction-items">
+        <h2>Current Auctions</h2>
+        <div id="items" class="items">
+        </div>
+    </section> -->
+    <div class="product-section">
+        <h2>Current Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="download.jpeg" alt="Product 1">
+                <p>2016-new-genuine-mink-cashmere-sweater-women</p>
+                <p>$12.00</p>
+                <button class="buy-btn">BUY</button>
+                <button class="bid-btn">BID</button>
+            </div>
+            <div class="product-item">
+                <img src="OIP.jpeg" alt="Product 2">
+                <p>Master Superior Synthetic Enamel</p>
+                <p>$17.00</p>
+                <button class="buy-btn">BUY</button>
+                <button class="bid-btn">BID</button>
+            </div>
+            <div class="product-item">
+                <img src="download (1).jpeg" alt="Product 3">
+                <p>Door LED Logo Projector</p>
+                <p>$15.00</p>
+                <button class="buy-btn">BUY</button>
+                <button class="bid-btn">BID</button>
+            </div>
+            <!-- Repeat for other products -->
+        </div>
+
+        <h2>Favourite Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="OIP (1).jpeg" alt="Product 4">
+                <p>Vintage-dress-2018-Summer-New-sleeveless</p>
+                <p>$15.00</p>
+                <button class="buy-btn">BUY</button>
+                <button class="bid-btn">BID</button>
+            </div>
+            <!-- Repeat for other favourite products -->
+        </div>
+
+        <h2>Viewed Products</h2>
+        <div class="product-grid">
+            <!-- Similar grid layout for viewed products -->
+        </div>
+    </div>
+
+    <div class="add-product">
+        <h2>Add a Product</h2>
+        <form id="addProductForm">
+            <input type="text" id="title" placeholder="Product Title" required>
+            <textarea id="description" placeholder="Product Description" required></textarea>
+            <input type="number" id="price" placeholder="Starting Price" required>
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+
+    <script>
+        window.onload = async function () {
+            const response = await fetch('/check-session');
+            const isLoggedIn = await response.json();
+
+            if (isLoggedIn) {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('register-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'block';
+            }
+
+            // Dynamically load 4 auction items
+            const auctionItems = [
+                { title: 'Antique Vase', description: 'A beautiful antique vase from the 18th century.', price: 500 },
+                { title: 'Vintage Car Model', description: 'A collectible car model from the 1950s.', price: 300 },
+                { title: 'Old Painting', description: 'An original painting from a renowned artist.', price: 1200 },
+                { title: 'Luxury Watch', description: 'A luxury wristwatch with a classic design.', price: 800 }
+            ];
+
+            const itemsContainer = document.getElementById('items');
+            auctionItems.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('item');
+                itemDiv.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <p>Starting Price: $${item.price}</p>
+                    <input type="number" placeholder="Enter your bid">
+                    <button>Place Bid</button>
+                `;
+                itemsContainer.appendChild(itemDiv);
+            });
+        };
+
+        // Check if the user is logged in using a server-side route
+        <!-- window.onload = async function () {
+            const response = await fetch('/check-session');
+            const isLoggedIn = await response.json();
+
+            if (isLoggedIn) {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('register-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'block';
+            }
+        }; -->
+
+        // Handle logout
+        document.getElementById('logout-link').addEventListener('click', async function() {
+            const response = await fetch('/logout', {
+                method: 'POST'
+            });
+
+            if (response.ok) {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Handle Add Product Form Submission
+        document.getElementById('addProductForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const price = document.getElementById('price').value;
+
+            // Send product data to the server
+            const response = await fetch('/add-product', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title, description, price }),
+            });
+
+            if (response.ok) {
+                alert('Product added successfully!');
+                // Optionally, clear the form after submission
+                document.getElementById('addProductForm').reset();
+            } else {
+                const errorData = await response.json();
+                alert(`Error adding product: ${errorData.error}`);
+            }
+        });
+    </script>
+</body>
+</html>
